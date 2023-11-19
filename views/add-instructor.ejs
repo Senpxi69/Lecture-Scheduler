@@ -1,0 +1,23 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container border m-3 p-5">
+
+    <form action="/add-instructor" method="post">
+        <div class="mb-3">
+          <label for="name" class="form-label">Instructor Name</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="contact" class="form-label">Contact Number</label>
+          <input type="text" class="form-control" id="contact" name="contact" required>
+        </div>
+        <div class="mb-3">
+          <label for="expertise" class="form-label">Expertise</label>
+          <input type="text" class="form-control" id="expertise" name="expertise" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Instructor</button>
+      </form>
+
+</div>
+
+<%- include("partials/footer.ejs") %>

@@ -1,0 +1,66 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container-fluid m-2 border p-5">
+    <h1>Add Lecture for <%= course.name %> Course</h1>
+
+    <form action="/courses/<%= course._id %>/add-lecture" method="POST" class="mt-4">
+        <!-- Lecture title -->
+        <div class="mb-3">
+            <label for="title" class="form-label">Lecture Title:</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+    
+        <!-- Scheduled Date -->
+        <div class="mb-3">
+            <label for="scheduledDate" class="form-label">Scheduled Date:</label>
+            <select class="form-select" id="scheduledDate" name="scheduledDate">
+                <!-- Add options for date dynamically -->
+                <% for (let i = 1; i <= 31; i++) { %>
+                    <option value="<%= i %>"><%= i %></option>
+                <% } %>
+            </select>
+        </div>
+    
+        <!-- Scheduled Month -->
+        <div class="mb-3">
+            <label for="scheduledMonth" class="form-label">Scheduled Month:</label>
+            <select class="form-select" id="scheduledMonth" name="scheduledMonth">
+                <% const months = [
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ]; %>
+    
+                <% months.forEach((month, index) => { %>
+                    <option value="<%= index + 1 %>"><%= month %></option>
+                <% }); %>
+            </select>
+        </div>
+    
+        <!-- Scheduled Year -->
+        <div class="mb-3">
+            <label for="scheduledYear" class="form-label">Scheduled Year:</label>
+            <select class="form-select" id="scheduledYear" name="scheduledYear">
+                <!-- Add options for year dynamically -->
+                <% const currentYear = new Date().getFullYear(); %>
+                <% for (let i = currentYear; i <= currentYear + 5; i++) { %>
+                    <option value="<%= i %>"><%= i %></option>
+                <% } %>
+            </select>
+        </div>
+    
+        <!-- Select Instructor -->
+        <div class="mb-3">
+            <label for="instructor" class="form-label">Select Instructor:</label>
+            <select class="form-select" id="instructor" name="instructor" required>
+                <% instructors.forEach(instructor => { %>
+                    <option value="<%= instructor._id %>"><%= instructor.name %></option>
+                <% }); %>
+            </select>
+        </div>
+    
+        <button type="submit" class="btn btn-primary">Add Lecture</button>
+    </form>
+    <a href="/lectures/<%= course._id %>"><button class="btn btn-primary m-3">Go back</button></a>
+</div>
+
+<%- include("partials/footer.ejs") %>

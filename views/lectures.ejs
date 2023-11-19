@@ -1,0 +1,53 @@
+<%- include("partials/header.ejs") %>
+
+<div>
+  <div class="card m-3">
+
+    <div class="card-body">
+      <h5 class="card-title"><%= course.name %></h5>
+      <p class="card-text"><%= course.description %></p>
+      <p class="card-text"><%= course.level %></p>
+      <a href="/courses/<%= course._id %>/add-lecture" class="btn btn-primary">Add lectures</a>
+
+      <a href="/"><button class="btn btn-primary">Go-back</button></a>
+    </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <% if (!lectures || lectures.length === 0) { %>
+    <p>No lectures available</p>
+    <% } else { %>
+    <ul>
+      <% lectures.forEach(lecture => { %>
+      <% if (lecture.course.equals(course._id)) { %>
+      <li>
+        <div class="card m-3" style="width: 18rem;">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><%= lecture.title %></li>
+            <li class="list-group-item"><%= lecture.scheduledDateTime.toLocaleDateString() %></li>
+            <% if (lecture.instructor) { %>
+            <li class="list-group-item">Instructor: <%= lecture.instructor.name %> - <%= lecture.instructor.expertise %>
+            </li>
+            <% } else { %>
+            <li class="list-group-item">Instructor: Not assigned</li>
+            <% } %>
+          </ul>
+
+        </div>
+      </li>
+      <% } %>
+      <% }); %>
+    </ul>
+    <% } %>
+  </div>
+</div>
+<div>
+
+</div>
+
+</div>
+
+
+<%- include("partials/footer.ejs") %>

@@ -1,0 +1,45 @@
+<%- include("partials/header.ejs") %>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 min-vh-100 bg-dark">
+            <!-- Include Sidebar Partial -->
+            <%- include('partials/sidebar') %>
+        </div>
+
+        <!-- Content Section -->
+        <div class="col-md-10">
+            <div class="row m-3">
+                <% if (Courses.length === 0) { %>
+                    <!-- If no courses available, display a message -->
+                    <div class="col-md-12">
+                        <h1>No courses available</h1>
+                        <a href="/courses"><button>Create a course</button></a>
+                    </div>
+                <% } else { %>
+                    <% Courses.forEach(course => { %>
+                        <div class="col-md-4 mb-4">
+                            <div class="card" style="width: 18rem;">
+                                <% if (course.image && course.image.contentType && course.image.data) { %>
+                                    <!-- Display image if available -->
+                                    <img src="data:<%= course.image.contentType %>;base64,<%= course.image.data %>" alt="Course Image">
+                                <% } else { %>
+                                    <!-- Display a placeholder or message if no image available -->
+                                    <p>No image available</p>
+                                <% } %>
+                                <div class="card-body course-card">
+                                    <h5 class="card-title text-center"><%= course.name %></h5>
+                                    <p class="card-text"><%= course.description %></p>
+                                    <p class="card-text"><small>Difficulty: <%= course.level %></small></p>
+                                    <a href="/lectures/<%= course._id %>" class="btn btn-primary">View Lectures</a>
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } %>
+            </div>
+        </div>
+    </div> 
+</div>
+
+<%- include("partials/footer.ejs") %>

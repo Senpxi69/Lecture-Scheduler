@@ -1,0 +1,56 @@
+<%- include("partials/header.ejs") %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 min-vh-100 bg-dark">
+                <!-- Include Sidebar Partial -->
+                <%- include('partials/sidebar') %>
+            </div>
+
+            <div class="col-md-4 mb-4 course">
+
+                <div class="form">
+                    <h2 class="title">Create a Course</h2>
+
+                    <form action="/courses" method="POST" enctype="multipart/form-data">
+                        <!-- Input fields -->
+                        <div class="name">
+                            <label for="name">Course Name:</label>
+                            <input type="text" id="name" name="name" required><br><br>
+                        </div>
+
+                        <div class="level">
+                            <label for="level">Level:</label>
+                            <select id="level" name="level" required>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select><br><br>
+                        </div>
+
+                        <div class="description">
+                            <label for="description">Description:</label><br>
+                            <textarea id="description" name="description" rows="4" cols="50"
+                                required></textarea><br><br>
+                        </div>
+
+                        <!-- File upload for image -->
+                        <div class="image">
+                            <label for="image">Course Image:</label>
+                            <input type="file" id="image" name="image"><br><br>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="button">
+                            <button type="submit" class="btn btn-primary"> Create Course </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <%- include("partials/footer.ejs") %>

@@ -1,0 +1,32 @@
+*{
+  background-image: url('/public/image/images.jpeg'); 
+  background-size: cover;
+}
+
+.instructor-name{
+  margin-top: 20px;
+}
+
+.course{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-left: 350px;
+  margin-right: 300px;
+}
+
+.form{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #000;
+  padding: 20px;
+}
+
+.course-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

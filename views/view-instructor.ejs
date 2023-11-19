@@ -1,0 +1,14 @@
+<%- include("partials/header.ejs") %>
+
+<div>
+    <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Name:<%=instructor.name %></h5>
+          <p class="card-text"> Contact :<%= instructor.contact %></p>
+          <p class="card-text">Expertise :<%= instructor.expertise %></p>
+          <a href="/instructor" class="btn btn-primary">Go-back</a>
+        </div>
+      </div>
+</div>
+
+<%- include("partials/footer.ejs") %>

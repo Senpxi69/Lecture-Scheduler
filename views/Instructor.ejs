@@ -1,0 +1,38 @@
+<%- include("partials/header.ejs") %>
+
+    <div class="container-fluid">
+        <div class="row">
+          <!-- Sidebar -->
+          <div class="col-md-2 min-vh-100 bg-dark">
+            <!-- Include Sidebar Partial -->
+            <%- include('partials/sidebar') %>
+          </div>
+      
+          <!-- Instructor Details -->
+          <div class="col-md-10 instructor-name">
+            <div class="row">
+              <!-- Cards for instructors -->
+              <% instructors.forEach(instructor => { %>
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <div class="card-body text-center">
+                    <!-- Instructor details -->
+                    <h5 class="card-title"><%= instructor.name %></h5>
+                    <h6 class="card-subtitle mb-2"><%= instructor.contact %></h6>
+                    <p class="card-text"><%= instructor.expertise %></p>
+                    <a href="/view-instructor/<%= instructor._id %>"><button class="btn btn-primary">View instructor</button></a>
+                  </div>
+                </div>
+              </div>
+              <% }); %>
+            </div>
+            <a href="/add-instructor"><button class="btn btn-success">Add new instructor</button></a>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+
+
+      <%- include("partials/footer.ejs") %>
