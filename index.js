@@ -12,7 +12,7 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 const upload = multer({ storage: storage });
 
-mongoose.connect("mongodb://0.0.0.0:27017/LectureScheduler");
+mongoose.connect("mongodb+srv://kartikvyas02:Karv9028@cluster0.irmndaj.mongodb.net/?retryWrites=true&w=majority");
 
 const lectureSchema = new mongoose.Schema({
     title: {
@@ -46,7 +46,15 @@ const instructorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    lectures: [lectureSchema]
+    lectures: [lectureSchema],
+    email:{
+        type:String,
+        required:true
+    },
+    password:{
+        type:String,
+        required:true
+    }
 });
 
 const courseschema = new mongoose.Schema({
@@ -177,12 +185,14 @@ app.get("/add-instructor",(req,res)=>{
 })
 
 app.post('/add-instructor', (req, res) => {
-    const { name, contact, expertise } = req.body;
+    const { name, contact, expertise, email, password } = req.body;
   
     const newInstructor = new Instructor({
       name,
       contact,
-      expertise
+      expertise,
+      email,
+      password
     });
   
     newInstructor.save()
@@ -195,13 +205,51 @@ app.post('/add-instructor', (req, res) => {
       });
   });
 
-  app.get("/view-instructor/:instructorId",async (req,res)=>{
+  app.post("/view-instructor", async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const instructor = await Instructor.findOne({ email, password });
+
+        if (instructor) {
+            res.redirect(`/view-instructor/${instructor._id}`);
+        } else {
+            res.status(401).send('Wrong Email or Password');
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
+
+app.get('/view-instructor/:instructorId', async (req, res) => {
     const instructorId = req.params.instructorId;
-    const instructor = await Instructor.findById(instructorId);
 
-    res.render("view-instructor",{instructor})
+    try {
+        const instructor = await Instructor.findById(instructorId);
+        if (!instructor) {
+            return res.status(404).send('Instructor not found');
+        }
 
-  })
+        const lectures = await Lecture.find({ instructor: instructorId });
+        // Fetch lectures where the instructor ID matches the specified instructorId
+
+        res.render('view-instructor', { instructor, lectures });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
+
+app.get("/instructor-list", async (req, res) => {
+    try {
+        const instructors = await Instructor.find();
+        res.render("instructor-list", { instructors });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
 
 app.listen(port,()=>{
     console.log(`app running on port ${port}`)

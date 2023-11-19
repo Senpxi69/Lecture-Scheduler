@@ -8,31 +8,22 @@
             <%- include('partials/sidebar') %>
           </div>
       
-          <!-- Instructor Details -->
+    
           <div class="col-md-10 instructor-name">
-            <div class="row">
-              <!-- Cards for instructors -->
-              <% instructors.forEach(instructor => { %>
-              <div class="col-md-4 mb-4">
-                <div class="card">
-                  <div class="card-body text-center">
-                    <!-- Instructor details -->
-                    <h5 class="card-title"><%= instructor.name %></h5>
-                    <h6 class="card-subtitle mb-2"><%= instructor.contact %></h6>
-                    <p class="card-text"><%= instructor.expertise %></p>
-                    <a href="/view-instructor/<%= instructor._id %>"><button class="btn btn-primary">View instructor</button></a>
-                  </div>
-                </div>
+            <form action="/view-instructor" method="POST" class="m-auto p-4 border rounded w-50">
+              <div class="mb-3">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" required>
               </div>
-              <% }); %>
-            </div>
-            <a href="/add-instructor"><button class="btn btn-success">Add new instructor</button></a>
+              <div class="mb-3">
+                <label for="inputPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
           </div>
         </div>
-      </div>
-      
-      
-      
+      </div>    
 
 
       <%- include("partials/footer.ejs") %>
