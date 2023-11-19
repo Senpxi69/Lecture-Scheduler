@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1",
     "start":"node index.js",
     "dev":"nodemon index.js"
+=======
+    "start":"node index.js",
+    "dev":"nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+>>>>>>> 98807936d1da62d9e3d556c32efa83fea03a8766
   },
   "keywords": [],
   "author": "",
