@@ -203,6 +203,6 @@ app.post('/add-instructor', (req, res) => {
 
   })
 
-app.listen(process.env.PORT||port,()=>{
-    console.log(`the app is running on port ${port}`)
-})
+  app.use('/.netlify/functions/index',express.Router)
+
+module.exports.handler = serverless(app)
