@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser")
 const multer = require('multer');
 const storage = multer.memoryStorage();
+const serverless = require("serverless-http")
 
 const app = express();
 const port = 3000;
@@ -202,6 +203,6 @@ app.post('/add-instructor', (req, res) => {
 
   })
 
-app.listen(port, () => {
-    console.log(`The server is running on port ${port}`);
-});
+app.listen(process.env.PORT||port,()=>{
+    console.log(`the app is running on port ${port}`)
+})
