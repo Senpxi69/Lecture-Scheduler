@@ -9,7 +9,22 @@
 
           <h6 class="card-subtitle mb-2 text-muted">Lectures:</h6>
 
-          
+         <% if (lectures.length > 0) { %>
+            <h2>Lectures:</h2>
+            <ul>
+                <% lectures.forEach(lecture => { %>
+                    <li>
+                        <div>
+                            <h3><%= lecture.title %></h3>
+                            <p>Description: <%= lecture.description %></p>
+                            <p>Scheduled Date: <%= lecture.scheduledDateTime.toDateString() %></p>
+                        </div>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No lectures found for this instructor.</p>
+        <% } %>
 
           <a href="/instructor" class="btn btn-primary">Go-back</a>
         </div>
